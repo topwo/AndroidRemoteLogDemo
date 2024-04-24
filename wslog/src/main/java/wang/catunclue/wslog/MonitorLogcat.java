@@ -17,6 +17,9 @@ class MonitorLogcat {
 
     private ShellProcessThread mLogcatThread;
 
+    private MonitorLogcat() {
+    }
+
     public static MonitorLogcat getInstance() {
         if (sLogcatRunner == null) {
             synchronized (MonitorLogcat.class) {
@@ -38,9 +41,6 @@ class MonitorLogcat {
 
     public void stop() {
         doStop();
-    }
-
-    private MonitorLogcat() {
     }
 
     private void doStop() {
@@ -71,7 +71,7 @@ class MonitorLogcat {
             BufferedReader reader = null;
 
             try {
-                exec = Runtime.getRuntime().exec("logcat -v threadtime");
+                exec = Runtime.getRuntime().exec("logcat");
                 inputStream = exec.getInputStream();
 
                 reader = new BufferedReader(new InputStreamReader(inputStream));
